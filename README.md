@@ -1,14 +1,14 @@
-# Employee REST API - ReliaQuest Challenge Implementation
+Employee REST API - ReliaQuest Challenge Implementation
 
 A secure REST API implementation for the ReliaQuest Entry-Level Java Challenge. This API serves as a bridge between an existing employee management system and the Employees-R-US SaaS platform.
 
-## Features
+Features
 
 - **Three RESTful Endpoints**: Complete implementation of all required endpoints
 - **Security**: HTTP Basic Authentication with role-based access
 - **Validation**: Input validation with meaningful error messages
 
-## 📋 API Endpoints
+API Endpoints
 
 ### GET /api/v1/employee
 Retrieves all employees in the system (unfiltered).
