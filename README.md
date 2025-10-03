@@ -10,7 +10,7 @@ A secure REST API implementation for the ReliaQuest Entry-Level Java Challenge. 
 
 ## 📋 API Endpoints
 
-### GET `/api/v1/employee`
+### GET /api/v1/employee
 Retrieves all employees in the system (unfiltered).
 
 **Authentication**: Required (HTTP Basic Auth)
