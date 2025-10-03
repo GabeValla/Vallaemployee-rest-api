@@ -2,14 +2,11 @@
 
 A secure REST API implementation for the ReliaQuest Entry-Level Java Challenge. This API serves as a bridge between an existing employee management system and the Employees-R-US SaaS platform.
 
-## 🚀 Features
+## Features
 
 - **Three RESTful Endpoints**: Complete implementation of all required endpoints
 - **Security**: HTTP Basic Authentication with role-based access
 - **Validation**: Input validation with meaningful error messages
-- **Clean Architecture**: Service layer with proper separation of concerns
-- **Comprehensive Logging**: Detailed logging for debugging and monitoring
-- **Mock Data**: Pre-loaded sample employees for testing
 
 ## 📋 API Endpoints
 
@@ -36,7 +33,7 @@ Creates a new employee in the system.
 **Response**: Created employee with generated UUID
 **Status Codes**: 201 (Created), 400 (Bad Request), 401 (Unauthorized), 500 (Internal Server Error)
 
-## 🔐 Authentication
+##Authentication
 
 The API uses HTTP Basic Authentication with the following credentials:
 
@@ -153,28 +150,14 @@ The project uses Spotless for code formatting:
 ./gradlew test
 ```
 
-## 🏗️ Architecture
-
-The implementation follows a clean, layered architecture:
-
-```
-┌─────────────────┐
-│   Controller    │ ← REST API endpoints
-├─────────────────┤
-│    Service      │ ← Business logic
-├─────────────────┤
-│     Model       │ ← Data structures
-└─────────────────┘
-```
-
-## 🔒 Security Considerations
+##Security Considerations
 
 - HTTP Basic Authentication for API access
 - Input validation with Bean Validation annotations
 - Proper error handling with appropriate HTTP status codes
 - Comprehensive logging for audit trails
 
-## 🚀 Future Enhancements
+##Future Enhancements
 
 - Database integration with JPA/Hibernate
 - JWT token authentication
@@ -183,14 +166,3 @@ The implementation follows a clean, layered architecture:
 - Docker containerization
 - Rate limiting and API throttling
 
-## 📄 License
-
-This project is part of the ReliaQuest Entry-Level Java Challenge implementation.
-
-## 🤝 Contributing
-
-This is a challenge submission, but feel free to fork and improve upon it!
-
----
-
-**Built with ❤️ for the ReliaQuest Entry-Level Java Challenge**
