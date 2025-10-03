@@ -40,22 +40,14 @@ The API uses HTTP Basic Authentication with the following credentials:
 - **Username**: `webhook-user`
 - **Password**: `webhook-secret-password`
 
-## 🛠️ Technology Stack
 
-- **Java 17**
-- **Spring Boot 3.x**
-- **Spring Security**
-- **Lombok** (for clean code generation)
-- **Gradle** (build tool)
-- **Spotless** (code formatting)
-
-## 🏃‍♂️ Running the Application
+Running the Application
 
 ### Prerequisites
 - Java 17 or higher
 - Git
 
-### Quick Start
+Quick Start
 
 1. **Clone the repository**:
    ```bash
@@ -77,87 +69,53 @@ The API uses HTTP Basic Authentication with the following credentials:
    - Base URL: `http://localhost:8080/api/v1/employee`
    - Health Check: `http://localhost:8080/actuator/health`
 
-## 🧪 Testing the API
+Testing the API
 
-### Get All Employees
+Get All Employees
 ```bash
 curl -u webhook-user:webhook-secret-password \
      -H "Content-Type: application/json" \
      http://localhost:8080/api/v1/employee
 ```
-
-### Get Employee by UUID
+Get Employee by UUID
 ```bash
 curl -u webhook-user:webhook-secret-password \
      -H "Content-Type: application/json" \
      http://localhost:8080/api/v1/employee/123e4567-e89b-12d3-a456-426614174000
 ```
 
-### Create New Employee
-```bash
-curl -u webhook-user:webhook-secret-password \
-     -H "Content-Type: application/json" \
-     -X POST \
-     -d '{
-       "firstName": "Alice",
-       "lastName": "Johnson",
-       "salary": 70000,
-       "age": 29,
-       "jobTitle": "Product Manager",
-       "email": "alice.johnson@company.com",
-       "contractHireDate": "2024-01-15T09:00:00Z"
-     }' \
-     http://localhost:8080/api/v1/employee
-```
 
-## 📁 Project Structure
 
-```
-entry-level-java-challenge/
-├── api/
-│   └── src/
-│       └── main/
-│           └── java/
-│               └── com/challenge/api/
-│                   ├── controller/          # REST endpoints
-│                   ├── service/            # Business logic
-│                   ├── model/              # Data models
-│                   └── config/             # Configuration
-├── IMPLEMENTATION_EXPLANATION.md           # Detailed documentation
-├── README.md                              # This file
-└── build.gradle                          # Build configuration
-```
-
-## 📚 Documentation
+Documentation
 
 For detailed implementation documentation, architecture decisions, and technical details, see [IMPLEMENTATION_EXPLANATION.md](IMPLEMENTATION_EXPLANATION.md).
 
-## 🔧 Development
+Development
 
-### Code Formatting
+Code Formatting
 The project uses Spotless for code formatting:
 ```bash
 ./gradlew spotlessApply
 ```
 
-### Building
+Building
 ```bash
 ./gradlew build
 ```
 
-### Testing
+Testing
 ```bash
 ./gradlew test
 ```
 
-##Security Considerations
+Security Considerations
 
 - HTTP Basic Authentication for API access
 - Input validation with Bean Validation annotations
 - Proper error handling with appropriate HTTP status codes
 - Comprehensive logging for audit trails
 
-##Future Enhancements
+Future Enhancements
 
 - Database integration with JPA/Hibernate
 - JWT token authentication
