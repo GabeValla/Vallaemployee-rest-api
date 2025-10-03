@@ -1,54 +1,196 @@
-# ReliaQuest's Entry-Level Java Challenge
+# Employee REST API - ReliaQuest Challenge Implementation
 
-Please keep the following in mind while working on this challenge:
-* Code implementations will not be graded for **correctness** but rather on practicality
-* Articulate clear and concise design methodologies, if necessary
-* Use clean coding etiquette
-  * E.g. avoid liberal use of new-lines, odd variable and method names, random indentation, etc...
-* Test cases are not required
+A secure REST API implementation for the ReliaQuest Entry-Level Java Challenge. This API serves as a bridge between an existing employee management system and the Employees-R-US SaaS platform.
 
-## Problem Statement
+## 🚀 Features
 
-Your employer has recently purchased a license to top-tier SaaS platform, Employees-R-US, to off-load all employee management responsibilities.
-Unfortunately, your company's product has an existing employee management solution that is tightly coupled to other services and therefore 
-cannot be replaced whole-cloth. Product and Development leads in your department have decided it would be best to interface
-the existing employee management solution with the commercial offering from Employees-R-US for the time being until all employees can be
-migrated to the new SaaS platform.
+- **Three RESTful Endpoints**: Complete implementation of all required endpoints
+- **Security**: HTTP Basic Authentication with role-based access
+- **Validation**: Input validation with meaningful error messages
+- **Clean Architecture**: Service layer with proper separation of concerns
+- **Comprehensive Logging**: Detailed logging for debugging and monitoring
+- **Mock Data**: Pre-loaded sample employees for testing
 
-Your ask is to expose employee information as a protected, secure REST API for consumption by Employees-R-US web hooks.
-The initial REST API will consist of 3 endpoints, listed in the following section. If for any reason the implementation 
-of an endpoint is problematic, the team lead will accept **pseudo-code** and a pertinent description (e.g. java-doc) of intent.
+## 📋 API Endpoints
 
-Good luck!
+### GET `/api/v1/employee`
+Retrieves all employees in the system (unfiltered).
 
-## Endpoints to implement (API module)
+**Authentication**: Required (HTTP Basic Auth)
+**Response**: List of all employees
+**Status Codes**: 200 (OK), 401 (Unauthorized)
 
-_See `com.challenge.api.controller.EmployeeController` for details._
+### GET `/api/v1/employee/{uuid}`
+Retrieves a specific employee by their UUID.
 
-getAllEmployees()
+**Authentication**: Required (HTTP Basic Auth)
+**Path Parameter**: UUID of the employee
+**Response**: Employee details or 404 if not found
+**Status Codes**: 200 (OK), 401 (Unauthorized), 404 (Not Found)
 
-    output - list of employees
-    description - this should return all employees, unfiltered
+### POST `/api/v1/employee`
+Creates a new employee in the system.
 
-getEmployeeByUuid(...)
+**Authentication**: Required (HTTP Basic Auth)
+**Request Body**: Employee creation request with validation
+**Response**: Created employee with generated UUID
+**Status Codes**: 201 (Created), 400 (Bad Request), 401 (Unauthorized), 500 (Internal Server Error)
 
-    path variable - employee UUID
-    output - employee
-    description - this should return a single employee based on the provided employee UUID
+## 🔐 Authentication
 
-createEmployee(...)
+The API uses HTTP Basic Authentication with the following credentials:
 
-    request body - attributes necessary to create an employee
-    output - employee
-    description - this should return a single employee, if created, otherwise error
+- **Username**: `webhook-user`
+- **Password**: `webhook-secret-password`
 
-## Code Formatting
+## 🛠️ Technology Stack
 
-This project utilizes Gradle plugin [Diffplug Spotless](https://github.com/diffplug/spotless/tree/main/plugin-gradle) to enforce format
-and style guidelines with every build.
+- **Java 17**
+- **Spring Boot 3.x**
+- **Spring Security**
+- **Lombok** (for clean code generation)
+- **Gradle** (build tool)
+- **Spotless** (code formatting)
 
-To format code according to style guidelines, you can run **spotlessApply** task.
-`./gradlew spotlessApply`
+## 🏃‍♂️ Running the Application
 
-The spotless plugin will also execute check-and-validation tasks as part of the gradle **build** task.
-`./gradlew build`
+### Prerequisites
+- Java 17 or higher
+- Git
+
+### Quick Start
+
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repository-url>
+   cd entry-level-java-challenge
+   ```
+
+2. **Build the project**:
+   ```bash
+   ./gradlew build
+   ```
+
+3. **Run the application**:
+   ```bash
+   ./gradlew bootRun
+   ```
+
+4. **Access the API**:
+   - Base URL: `http://localhost:8080/api/v1/employee`
+   - Health Check: `http://localhost:8080/actuator/health`
+
+## 🧪 Testing the API
+
+### Get All Employees
+```bash
+curl -u webhook-user:webhook-secret-password \
+     -H "Content-Type: application/json" \
+     http://localhost:8080/api/v1/employee
+```
+
+### Get Employee by UUID
+```bash
+curl -u webhook-user:webhook-secret-password \
+     -H "Content-Type: application/json" \
+     http://localhost:8080/api/v1/employee/123e4567-e89b-12d3-a456-426614174000
+```
+
+### Create New Employee
+```bash
+curl -u webhook-user:webhook-secret-password \
+     -H "Content-Type: application/json" \
+     -X POST \
+     -d '{
+       "firstName": "Alice",
+       "lastName": "Johnson",
+       "salary": 70000,
+       "age": 29,
+       "jobTitle": "Product Manager",
+       "email": "alice.johnson@company.com",
+       "contractHireDate": "2024-01-15T09:00:00Z"
+     }' \
+     http://localhost:8080/api/v1/employee
+```
+
+## 📁 Project Structure
+
+```
+entry-level-java-challenge/
+├── api/
+│   └── src/
+│       └── main/
+│           └── java/
+│               └── com/challenge/api/
+│                   ├── controller/          # REST endpoints
+│                   ├── service/            # Business logic
+│                   ├── model/              # Data models
+│                   └── config/             # Configuration
+├── IMPLEMENTATION_EXPLANATION.md           # Detailed documentation
+├── README.md                              # This file
+└── build.gradle                          # Build configuration
+```
+
+## 📚 Documentation
+
+For detailed implementation documentation, architecture decisions, and technical details, see [IMPLEMENTATION_EXPLANATION.md](IMPLEMENTATION_EXPLANATION.md).
+
+## 🔧 Development
+
+### Code Formatting
+The project uses Spotless for code formatting:
+```bash
+./gradlew spotlessApply
+```
+
+### Building
+```bash
+./gradlew build
+```
+
+### Testing
+```bash
+./gradlew test
+```
+
+## 🏗️ Architecture
+
+The implementation follows a clean, layered architecture:
+
+```
+┌─────────────────┐
+│   Controller    │ ← REST API endpoints
+├─────────────────┤
+│    Service      │ ← Business logic
+├─────────────────┤
+│     Model       │ ← Data structures
+└─────────────────┘
+```
+
+## 🔒 Security Considerations
+
+- HTTP Basic Authentication for API access
+- Input validation with Bean Validation annotations
+- Proper error handling with appropriate HTTP status codes
+- Comprehensive logging for audit trails
+
+## 🚀 Future Enhancements
+
+- Database integration with JPA/Hibernate
+- JWT token authentication
+- API documentation with Swagger/OpenAPI
+- Comprehensive unit and integration tests
+- Docker containerization
+- Rate limiting and API throttling
+
+## 📄 License
+
+This project is part of the ReliaQuest Entry-Level Java Challenge implementation.
+
+## 🤝 Contributing
+
+This is a challenge submission, but feel free to fork and improve upon it!
+
+---
+
+**Built with ❤️ for the ReliaQuest Entry-Level Java Challenge**
